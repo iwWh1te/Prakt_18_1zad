@@ -40,6 +40,7 @@ MainWindow::MainWindow(){
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
 	QString strGlobalX,strX;
+	
 	xMouse=event->x();
 	xGlobal=event->globalX();
 	strX=QString::number(xMouse);
@@ -52,6 +53,16 @@ void MainWindow::mousePressEvent(QMouseEvent *event){
 	strY=QString::number(yMouse);
 	strGlobalY=QString::number(yGlobal);
 	yLabel->setText("Mouse Y: "+strY+" [ "+strGlobalY+" ] ");
+	
+	QString strFlagGreen;
+	if ((xMouse>leftButtonGreen) && (xMouse<leftButtonGreen+widthButtonGreen) && (yMouse>topButtonGreen) && (yMouse<topButtonGreen+heightButtonGreen)){
+		flagGreen=1;
+	}
+	else {
+		flagGreen=0;
+	}
+	strFlagGreen=QString::number(flagGreen);
+	flagGreenLabel->setText("flagGreen: "+strFlagGreen);
 }
 
 void MainWindow::paintEvent(QPaintEvent *){
