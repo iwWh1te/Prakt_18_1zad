@@ -1,12 +1,16 @@
 #include <QtWidgets>
-int xMouse=0;
-int yMouse=0;
-int xGlobal=0;
-int yGlobal=0;
+int xMouse=0;  int yMouse=0;
+int xGlobal=0; int yGlobal=0;
+int leftButtonGreen=150;
+int topButtonGreen=220;
+int widthButtonGreen=100;
+int heightButtonGreen=50;
+
 class MainWindow:public QMainWindow{
 	public:
 		MainWindow();
 		void mousePressEvent(QMouseEvent *event);
+		void paintEvent(QPaintEvent *event);
 	private:
 QLabel *xLabel, *yLabel;
 };
@@ -39,6 +43,13 @@ void MainWindow::mousePressEvent(QMouseEvent *event){
 	strY=QString::number(yMouse);
 	strGlobalY=QString::number(yGlobal);
 	yLabel->setText("Mouse Y: "+strY+" [ "+strGlobalY+" ] ");
+}
+
+void MainWindow::paintEvent(QPaintEvent *){
+	QPainter painter(this);
+	painter.setPen(QPen(Qt::green,4,Qt::SolidLine,Qt::RoundCap));
+	painter.setBrush(QBrush(Qt::white,Qt::NoBrush));
+	painter.drawRect(leftButtonGreen,topButtonGreen,widthButtonGreen,heightButtonGreen);
 }
 
 int main(int argc,char *argv[]){
