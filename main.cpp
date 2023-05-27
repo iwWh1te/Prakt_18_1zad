@@ -1,6 +1,8 @@
 #include <QtWidgets>
 int xMouse=0;
 int yMouse=0;
+int xGlobal=0;
+int yGlobal=0;
 class MainWindow:public QMainWindow{
 	public:
 		MainWindow();
@@ -8,7 +10,6 @@ class MainWindow:public QMainWindow{
 	private:
 QLabel *xLabel, *yLabel;
 };
-
 
 MainWindow::MainWindow(){
 	setWindowTitle("Mouse v0.2");
@@ -25,15 +26,19 @@ MainWindow::MainWindow(){
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
-	QString strX;
+	QString strGlobalX,strX;
 	xMouse=event->x();
+	xGlobal=event->globalX();
 	strX=QString::number(xMouse);
-	xLabel->setText("Mouse X: "+strX);
+	strGlobalX=QString::number(xGlobal);
+	xLabel->setText("Mouse X: "+strX+" [ "+strGlobalX+" ] ");
 	
-	QString strY;
+	QString strGlobalY,strY;
 	yMouse=event->y();
+	yGlobal=event->globalY();
 	strY=QString::number(yMouse);
-	yLabel->setText("Mouse Y: "+strY);
+	strGlobalY=QString::number(yGlobal);
+	yLabel->setText("Mouse Y: "+strY+" [ "+strGlobalY+" ] ");
 }
 
 int main(int argc,char *argv[]){
