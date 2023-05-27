@@ -1,11 +1,14 @@
 #include <QtWidgets>
-
+int xMouse=0;
+int yMouse=0;
 class MainWindow:public QMainWindow{
 	public:
 		MainWindow();
+		void mousePressEvent(QMouseEvent *event);
 	private:
 QLabel *xLabel, *yLabel;
 };
+
 
 MainWindow::MainWindow(){
 	setWindowTitle("Mouse v0.2");
@@ -19,6 +22,18 @@ MainWindow::MainWindow(){
 	yLabel->setGeometry(150,125,850,120);
 	yLabel->setFont(labelFont);
 	yLabel->setText("Mouse Y:");
+}
+
+void MainWindow::mousePressEvent(QMouseEvent *event){
+	QString strX;
+	xMouse=event->x();
+	strX=QString::number(xMouse);
+	xLabel->setText("Mouse X: "+strX);
+	
+	QString strY;
+	yMouse=event->y();
+	strY=QString::number(yMouse);
+	yLabel->setText("Mouse Y: "+strY);
 }
 
 int main(int argc,char *argv[]){
